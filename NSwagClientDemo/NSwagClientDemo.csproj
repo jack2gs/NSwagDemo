@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <RootNamespace>NSwagClientDemo</RootNamespace>
+    <GenerateCode>True</GenerateCode>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NSwag.MSBuild" Version="13.6.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Melon.Net.Http\Melon.Net.Http.csproj" />
+    <ProjectReference Include="..\NSwagDemo\NSwagDemo.csproj" />
+  </ItemGroup>
+
+  <!--<Target Name="NSwag" BeforeTargets="Build">
+    <Copy SourceFiles="@(Reference)" DestinationFolder="$(OutDir)" />
+    <Exec Command="$(NSwagExe_Core31) aspnetcore2openapi /assembly:$(Target)/NSwagDemo.dll /output:swagger.json" />
+    <Exec Command="$(NSwagExe) openapi2csclient /input:swagger.json /output:GeneratedClients.cs" />
+    <RemoveDir Directories="$(OutDir)Reference" />
+  </Target>-->
+  <!--<Target Name="NSwag" BeforeTargets="Build">
+    <Copy SourceFiles="@(ReferencePath)" DestinationFolder="$(OutDir)References" />
+    <Exec Command="$(NSwagExe_Core31) run nswag.json /variables:Configuration=$(Configuration)" />
+    <RemoveDir Directories="$(OutDir)References" />
+  </Target>-->
+
+  <Target Name="NSwag" BeforeTargets="PrepareForBuild" Condition="'$(GenerateCode)'=='True' ">
+    <Exec Command="$(NSwagExe_Core31) run nswag.json /variables:Configuration=$(Configuration),Namespace=$(RootNamespace),ContractsNamespace=$(RootNamespace).Contracts" />
+  </Target>
+</Project>
