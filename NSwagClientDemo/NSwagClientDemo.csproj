@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Melon.Net.Http\Melon.Net.Http.csproj" />
-    <ProjectReference Include="..\NSwagDemo\NSwagDemo.csproj" />
+    <ProjectReference Include="..\NSwagDemo\NSwagDemo.WebApi.csproj" />
   </ItemGroup>
 
   <!--<Target Name="NSwag" BeforeTargets="Build">

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSwagDemo", "NSwagDemo\NSwagDemo.csproj", "{B3B6A715-8110-4304-AEE0-6321A7D5DDE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSwagDemo.WebApi", "NSwagDemo\NSwagDemo.WebApi.csproj", "{B3B6A715-8110-4304-AEE0-6321A7D5DDE4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSwagClientDemo", "NSwagClientDemo\NSwagClientDemo.csproj", "{9E07242B-5EF0-4C05-A687-C8322747CD2D}"
 EndProject

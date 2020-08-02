@@ -3,7 +3,7 @@
   "defaultVariables": null,
   "documentGenerator": {
     "aspNetCoreToOpenApi": {
-      "project": "../NSwagDemo/NSwagDemo.csproj",
+      "project": "../NSwagDemo/NSwagDemo.WebApi.csproj",
       "msBuildProjectExtensionsPath": null,
       "configuration": "$(Configuration)",
       "runtime": null,
