@@ -1,22 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
-using Melon.Net.Http;
 using Melon.Net.Http.DependencyInjection;
 using Melon.Net.Http.HttpClientConfiguration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using NSwagClientDemo.Contracts;
+using IHttpClientFactory = Melon.Net.Http.IHttpClientFactory;
 
 namespace NSwagClientDemo.Consumer
 {
     class Program
     {
         static async Task Main(string[] args)
-        {
+        { 
+            HttpClient.DefaultProxy = new WebProxy(new Uri("http://localhost:8888"), false);
             ServiceCollection sc = new ServiceCollection();
             sc.AddHttpClientServices()
-                .AddHttpClient("NSwagClientDemo", client => { client.BaseAddress = new Uri("https://localhost:44364/"); },
+                .AddHttpClient("NSwagClientDemo", client =>
+                    {
+                        client.BaseAddress = new Uri("https://localhost:44364/");
+                    },
                     configuration => { configuration.HttpRequestMessageHeaders = new Dictionary<string, string>(){{"Bearer", "MyToken"}}; });
 
             var serviceProvider = sc.BuildServiceProvider();
@@ -39,8 +45,18 @@ namespace NSwagClientDemo.Consumer
                 Quantity = 50
             });
             Console.WriteLine($"Post Order Result: {JsonConvert.SerializeObject(createdOrderLine)}");
-            Console.ReadKey();
 
+            var putOrderLine = await orderLineClient.PutAsync(10, new OrderLineContract()
+            {
+                Id = 0,
+                OrderId = 10,
+                Price = 100.5m,
+                ProductId = 2,
+                Quantity = 50
+            });
+            Console.WriteLine($"Post Order Result: {JsonConvert.SerializeObject(putOrderLine)}");
+
+            Console.ReadKey();
         }
     }
 }

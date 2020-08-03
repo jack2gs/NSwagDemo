@@ -36,10 +36,32 @@ namespace NSwagDemo.Controllers
         public  Task<OrderLineContract> PostAsync([FromBody]OrderLineContract orderLineContract)
         {
            var body =   new StreamReader(Request.Body).ReadToEndAsync().Result;
-            _logger.LogInformation($"Order Line, request content: {body}");
-            _logger.LogInformation($"Order Line: {JsonConvert.SerializeObject(orderLineContract)}");
+            _logger.LogInformation($"POST Order Line, request content: {body}");
+            _logger.LogInformation($"POST Order Line: {JsonConvert.SerializeObject(orderLineContract)}");
 
             return Task.FromResult(orderLineContract);
         }
+
+        [HttpPut]
+        [Route("{id}")]
+        public Task<OrderLineContract> PutAsync(int id, OrderLineContract orderLineContract)
+        {
+            var body = new StreamReader(Request.Body).ReadToEndAsync().Result;
+            _logger.LogInformation($"PUT Order Line, request content: {body}");
+            _logger.LogInformation($"PUT Order Line:  {JsonConvert.SerializeObject(orderLineContract)}");
+
+            return Task.FromResult(orderLineContract);
+        }
+
+        //[HttpPut]
+        //[Route("{id}")]
+        //public Task<OrderLineContract> PutAsync(int id, decimal price, int quantity, int productId)
+        //{
+        //    var body = new StreamReader(Request.Body).ReadToEndAsync().Result;
+        //    _logger.LogInformation($"PUT Order Line, request content: {body}");
+        //    _logger.LogInformation($"PUT Order Line: price={price}, quantity={quantity}, productId={productId}");
+
+        //    return Task.FromResult(new OrderLineContract(id, 1, productId, price, quantity));
+        //}
     }
 }
