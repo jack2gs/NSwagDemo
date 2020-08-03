@@ -16,7 +16,7 @@ namespace NSwagClientDemo.Consumer
     {
         static async Task Main(string[] args)
         { 
-            HttpClient.DefaultProxy = new WebProxy(new Uri("http://localhost:8888"), false);
+            //HttpClient.DefaultProxy = new WebProxy(new Uri("http://localhost:8888"), false);
             ServiceCollection sc = new ServiceCollection();
             sc.AddHttpClientServices()
                 .AddHttpClient("NSwagClientDemo", client =>
